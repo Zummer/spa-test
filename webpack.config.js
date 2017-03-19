@@ -1,9 +1,7 @@
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 const extractLess = new ExtractTextPlugin({
-  filename: "[name].css",
-  disable: process.env.NODE_ENV === "development"
-
+  filename: "[name].css"
 });
 
 module.exports = {
@@ -45,6 +43,5 @@ module.exports = {
   },
   plugins: [
     extractLess
-
   ]
 };
