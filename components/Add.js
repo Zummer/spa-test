@@ -3,14 +3,14 @@ import {connect} from 'react-redux'
 import {addFlash} from '../actions'
 
 const Add = ({
-  dispatch
+  addFlash
 }) =>
   <button className="btn btn-primary"
-    onClick={() =>
-      dispatch(addFlash())
-    }>
-    Добавить
+    onClick={() => addFlash()}>
+    Добавить блок
   </button>
   ;
 
-export default connect()(Add);
+export default connect(null, {
+  addFlash
+})(Add);

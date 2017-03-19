@@ -15,17 +15,18 @@ const ExtendedFlashHOC = (InnerComponent) => {
         selected,
         text,
         color,
+        show,
         dispatch
       } = this.props;
 
       let clickTimeout;
 
-      // в базовый компонент передаем только то, что нужно
-      // например, color и dispatch не передаём
       const newProps = {
         id,
         selected,
         text,
+        show,
+        dispatch,
         initialClass: `flash alert alert-${color}`,
         onDeleteClick: (e) => {
           e.preventDefault();

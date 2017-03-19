@@ -11,6 +11,7 @@ const SimpleFlash = ({
   initialClass = 'flash alert alert-info',
   text,
   selected,
+  show,
   dispatch,
   clickTimeout,
   onDeleteClick = () => dispatch(deleteFlash(id)),
@@ -20,8 +21,13 @@ const SimpleFlash = ({
     clickTimeout = setTimeout(() =>
       dispatch(toggleSelectFlash(id)), 300);
   }
-}) =>
-  <li className={classNames(initialClass, {selected})}
+}) => {
+
+  return (
+    <li className={classNames(initialClass, {
+      selected,
+      show
+    })}
     onDoubleClick={onDoubleClick}
     onClick={onClick}>
     <button className="close"
@@ -30,8 +36,8 @@ const SimpleFlash = ({
     </button>
     {text}
   </li>
-  ;
-
+ );
+}
 SimpleFlash.propTypes = {
   id: React.PropTypes.number.isRequired,
   text: React.PropTypes.string.isRequired,

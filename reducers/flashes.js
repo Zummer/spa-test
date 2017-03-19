@@ -4,8 +4,32 @@ const toggleColor = (color) => {
 
 const flash = (state, action) => {
   switch (action.type) {
+    case 'HIDE':
+      if (state.id !== action.id) {
+        return state;
+
+      }
+
+      return {
+        ...state,
+        show: false
+
+      };
+    case 'SHOW':
+      if (state.id !== action.id) {
+        return state;
+
+      }
+
+      return {
+        ...state,
+        show: true
+
+      };
     case 'ADD':
-      return action.flash;
+      return {
+        ...action.flash
+      };
     case 'TOGGLE_SELECT':
       if (state.id !== action.id) {
         return state;
@@ -46,6 +70,8 @@ const flashes = (state = [], action) => {
       ]
     case 'TOGGLE_SELECT':
     case 'TOGGLE_COLOR':
+    case 'SHOW':
+    case 'HIDE':
       return state.map(t =>
         flash(t, action)
       );

@@ -2,14 +2,30 @@ import loremIpsum from 'lorem-ipsum'
 
 let nextFlashId = 0;
 
-export const addFlash = () => {
+export const showFlash = (id) => {
+  return {
+    type: 'SHOW',
+    id
+  }
+}
+
+export const hideFlash = (id) => {
+  return {
+    type: 'HIDE',
+    id
+  }
+}
+
+
+export const addFlash = () => (dispatch) => {
   const maybeExtendedFlash = Math.random() > 0.5;
   const flash = {
     id: nextFlashId++,
     text: loremIpsum({
       count: 3
     }),
-    selected: false
+    selected: false,
+    show: false
   };
 
   if (maybeExtendedFlash) {
@@ -17,17 +33,24 @@ export const addFlash = () => {
     flash.color = colors[Math.floor(Math.random()*colors.length)];
   }
 
-  return {
+  dispatch({
     type: 'ADD',
     flash
-  };
+  });
+
+  setTimeout(() => dispatch(showFlash(flash.id)), 10);
+
 }
 
-export const deleteFlash = (id) => {
-  return {
-    type: 'DELETE',
-    id
-  }
+export const deleteFlash = (id) => (dispatch) => {
+  dispatch(hideFlash(id));
+
+  setTimeout(() =>
+    dispatch({
+      type: 'DELETE',
+      id
+    }), 300);
+
 }
 
 export const toggleSelectFlash = (id) => {

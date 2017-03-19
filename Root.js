@@ -1,10 +1,13 @@
 import React from 'react'
+import thunk from 'redux-thunk'
+import logger from 'redux-logger'
 import {Provider} from 'react-redux'
-import {createStore} from 'redux'
+import {createStore, applyMiddleware} from 'redux'
 import rootReducer from './reducers'
 import App from './components/App'
 
-const store = createStore(rootReducer);
+const middleware = applyMiddleware(thunk, logger());
+const store = createStore(rootReducer, middleware);
 
 const Root = () => (
   <Provider store={store}>
